@@ -556,14 +556,15 @@ async function saveList(key, arr){
     toast("خطا در ذخیره سازی Firebase");
   }
 }
-}
+
 async function loadObj(key, fallback){
-  try{ const res = await window.storage.get(key, true); return res ? JSON.parse(res.value) : fallback; }
-  catch(e){ return fallback; }
-}
-async function saveObj(key, obj){
-  try{ await window.storage.set(key, JSON.stringify(obj), true); }
-  catch(e){ toast('خطا در ذخیره‌سازی.'); }
+  try{ 
+    const res = await window.storage.get(key, true); 
+    return res ? JSON.parse(res.value) : fallback; 
+  }
+  catch(e){ 
+    return fallback; 
+  }
 }
 
 /* ---------- gallery ---------- */
