@@ -528,12 +528,30 @@ window.addEventListener('blur', ()=>pressed.clear());
 
 /* ---------- storage helpers ---------- */
 async function loadList(key){
-  try{ const res = await window.storage.get(key, true); return res ? JSON.parse(res.value) : []; }
-  catch(e){ return []; }
+  try{
+    const snapshot = await getDocs(collection(window.db, key));
+    return snapshot.docs.map(doc => doc.data());
+  }
+  catch(e){
+    console.log("Firebase Load Error:", e);
+    return [];
+  }
 }
+
 async function saveList(key, arr){
-  try{ await window.storage.set(key, JSON.stringify(arr), true); }
-  catch(e){ toast('خطا در ذخیره‌سازی.'); }
+  try{
+    for(const item of arr){
+      await setDoc(
+        doc(window.db, key, item.id),
+        item
+      );
+    }
+  }
+  catch(e){
+    console.log("Firebase Save Error:", e);
+    toast("خطا در ذخیره سازی Firebase");
+  }
+}
 }
 async function loadObj(key, fallback){
   try{ const res = await window.storage.get(key, true); return res ? JSON.parse(res.value) : fallback; }
