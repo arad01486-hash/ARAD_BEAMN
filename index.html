@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
+<head><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import { 
+getFirestore 
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBTxTDcXgjTo1YdUtfqmumkiqSVP291ldM",
+  authDomain: "arad-8748b.firebaseapp.com",
+  projectId: "arad-8748b",
+  storageBucket: "arad-8748b.firebasestorage.app",
+  messagingSenderId: "827019449476",
+  appId: "1:827019449476:web:a617c3d0c9b486279f5ed1",
+  measurementId: "G-QBCFFG3HHT"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+window.db = getFirestore(app);
+
+console.log("Firebase وصل شد ✅");
+
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARAD.BeamNG</title>
